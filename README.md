@@ -4,9 +4,11 @@ This is a Tip Calculator application for iOS and my first iOS native app that I 
 for fun.
 
 Time spent:
+
 10 hrs
 
 Completed:
+
 * [x] Required: User can enter a bill amount, choose a tip percentage, and see the tip and total values.
 * [x] Required: Settings page to change the default tip percentage.
 * [x] Optional: Settings page to change currency and color theme.
@@ -16,9 +18,11 @@ Completed:
 * [x] Optional: Ability to send text message with bill total included to remind amount owed.
 
 Notes:
+
 1. The pay button was originally intended to use the Venmo API to allow for payments but the
 API has been discontinued and instead the pay button launches an SMS on a Apple device with
 the amount owed prepopulated.
 
 Video Walkthrough:
+
 ![Video Walkthrough](recording.gif)
