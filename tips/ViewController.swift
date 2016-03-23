@@ -70,9 +70,9 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         if (currentCurrencyIndex == 0) {
             currencySignLabel.text = "$"
         } else if (currentCurrencyIndex == 1) {
-            currencySignLabel.text = "£"
-        } else {
             currencySignLabel.text = "€"
+        } else {
+            currencySignLabel.text = "£"
         }
         
         let currentColorIndex = defaults.integerForKey("selectedColorIndex")
