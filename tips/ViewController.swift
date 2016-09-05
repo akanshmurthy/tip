@@ -18,16 +18,31 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var currencySignLabel: UILabel!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var divideByPeopleControl: UISegmentedControl!
+    @IBOutlet weak var plusSignLabel: UILabel!
     var totalBill = 0.00
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        hideOnStart(true)
         
-        billField.text = "0.00"
+        billField.text = ""
         tipLabel.text = "0.00"
         totalLabel.text = "0.00"
         
+        billField.becomeFirstResponder()
+        
+    }
+    
+    func hideOnStart(hideOnStart: Bool) {
+        let opacity: CGFloat = hideOnStart ? 0 : 1
+        
+        tipLabel.alpha = opacity
+        totalLabel.alpha = opacity
+        tipControl.alpha = opacity
+        backgroundView.alpha = opacity
+        currencySignLabel.alpha = opacity
+        plusSignLabel.alpha = opacity
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,6 +56,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     }
     
     @IBAction func onEditingChanged(sender: AnyObject) {
+        hideOnStart(false)
         let tipPercentages = [0.18, 0.2, 0.22]
         let tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
         let billAmount = billField.text!._bridgeToObjectiveC().doubleValue

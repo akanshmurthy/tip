@@ -13,9 +13,11 @@ Completed:
 * [x] Required: Settings page to change the default tip percentage.
 * [x] Optional: Settings page to change currency and color theme.
 * [x] Optional: A clear button visible to clear bill amount.
-* [x] Optional: UI animation with the dollar sign every time a calculation occurs.
+* [x] Optional: UI animation with the dollar sign every time a calculation occurs and fade in once bill field is non-empty
 * [x] Optional: Ability to split bill with up to 6 people.
 * [x] Optional: Ability to send text message with bill total included to remind amount owed.
+* [x] Optional: Remembering bill across app restarts
+* [x] Optional: Make bill field first responder with keyboard visible immediately
 
 Notes:
 

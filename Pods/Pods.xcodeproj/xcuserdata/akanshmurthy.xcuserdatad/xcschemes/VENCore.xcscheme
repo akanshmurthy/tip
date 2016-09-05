@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '871F728B035BC801DB335DD0'
+               BlueprintIdentifier = '67B0B59DC330C91C9060B9D1'
                BlueprintName = 'VENCore'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'VENCore.framework'>

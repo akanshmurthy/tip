@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="es0-H7-hNF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="es0-H7-hNF">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--tips-->
@@ -86,7 +86,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="JTo-da-Jrh">
-                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                                <rect key="frame" x="95" y="65" width="320" height="503"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -114,6 +114,7 @@
                         <outlet property="billField" destination="rb1-AU-v1c" id="j2J-2J-rdZ"/>
                         <outlet property="currencySignLabel" destination="acB-Pa-pmC" id="MN5-hY-i3t"/>
                         <outlet property="divideByPeopleControl" destination="6fc-r0-zpy" id="43s-GE-8QB"/>
+                        <outlet property="plusSignLabel" destination="i8X-dF-3Co" id="oa1-LL-Qa0"/>
                         <outlet property="tipControl" destination="oAr-VH-ymu" id="sX6-ij-wqX"/>
                         <outlet property="tipLabel" destination="sGL-hi-TVU" id="0Ic-3g-O7y"/>
                         <outlet property="totalLabel" destination="HYo-mN-ayh" id="Oyy-mp-W1K"/>
