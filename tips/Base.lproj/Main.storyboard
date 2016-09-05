@@ -86,7 +86,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="JTo-da-Jrh">
-                                <rect key="frame" x="95" y="65" width="320" height="503"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
