@@ -40,7 +40,6 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         tipLabel.alpha = opacity
         totalLabel.alpha = opacity
         tipControl.alpha = opacity
-        backgroundView.alpha = opacity
         currencySignLabel.alpha = opacity
         plusSignLabel.alpha = opacity
     }
@@ -99,7 +98,7 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
             totalLabel.textColor = UIColor.blackColor()
             currencySignLabel.textColor = UIColor.blackColor()
         } else if (currentColorIndex == 1) {
-            backgroundView.backgroundColor = UIColor.blackColor()
+            backgroundView.backgroundColor = UIColor.grayColor()
             backgroundView.alpha = 0.5
             billField.textColor = UIColor.redColor()
             tipLabel.textColor = UIColor.redColor()
