@@ -27,4 +27,4 @@ the amount owed prepopulated.
 
 Video Walkthrough:
 
-![Video Walkthrough](demo.gif)
+![Video Walkthrough](featuredemo.gif)
