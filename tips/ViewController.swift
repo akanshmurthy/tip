@@ -19,7 +19,15 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var divideByPeopleControl: UISegmentedControl!
     @IBOutlet weak var plusSignLabel: UILabel!
+    @IBOutlet weak var payButton: UIButton!
+    
     var totalBill = 0.00
+    let initialTipLabelY: CGFloat = 200
+    let plusSignLabelY: CGFloat = 200
+    let currencySignLabelY: CGFloat = 260
+    let totalLabelY: CGFloat = 260
+    let tipControlY: CGFloat = 330
+    let deltaY: CGFloat = 100
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,15 +39,17 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         totalLabel.text = "0.00"
         
         billField.becomeFirstResponder()
-        
+        navigationController?.navigationBar.barTintColor = UIColor(red: 200/255.0, green: 50/255.0, blue: 50/255.0, alpha: 1.0)
     }
     
-    func hideOnStart(hideOnStart: Bool) {
+    func hideOnStart(_ hideOnStart: Bool) {
         let opacity: CGFloat = hideOnStart ? 0 : 1
         
         tipLabel.alpha = opacity
         totalLabel.alpha = opacity
         tipControl.alpha = opacity
+        divideByPeopleControl.alpha = opacity
+        payButton.alpha = opacity
         currencySignLabel.alpha = opacity
         plusSignLabel.alpha = opacity
     }
@@ -54,8 +64,9 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         return selectedPeopleIndex._bridgeToObjectiveC().doubleValue + 1.0
     }
     
-    @IBAction func onEditingChanged(sender: AnyObject) {
+    @IBAction func onEditingChanged(_ sender: AnyObject) {
         hideOnStart(false)
+        animateFields()
         let tipPercentages = [0.18, 0.2, 0.22]
         let tipPercentage = tipPercentages[tipControl.selectedSegmentIndex]
         let billAmount = billField.text!._bridgeToObjectiveC().doubleValue
@@ -71,17 +82,17 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         currencySignLabel.rotate360Degrees()
     }
 
-    @IBAction func onTap(sender: AnyObject) {
+    @IBAction func onTap(_ sender: AnyObject) {
         view.endEditing(true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let selectedTipIndex = defaults.integerForKey("selectedTipIndex")
+        let defaults = UserDefaults.standard
+        let selectedTipIndex = defaults.integer(forKey: "selectedTipIndex")
         tipControl.selectedSegmentIndex = selectedTipIndex
         
-        let currentCurrencyIndex = defaults.integerForKey("selectedCurrencyIndex")
+        let currentCurrencyIndex = defaults.integer(forKey: "selectedCurrencyIndex")
         if (currentCurrencyIndex == 0) {
             currencySignLabel.text = "$"
         } else if (currentCurrencyIndex == 1) {
@@ -90,20 +101,21 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
             currencySignLabel.text = "£"
         }
         
-        let currentColorIndex = defaults.integerForKey("selectedColorIndex")
+        let currentColorIndex = defaults.integer(forKey: "selectedColorIndex")
         if (currentColorIndex == 0) {
-            backgroundView.backgroundColor = UIColor.clearColor()
-            billField.textColor = UIColor.blackColor()
-            tipLabel.textColor = UIColor.blackColor()
-            totalLabel.textColor = UIColor.blackColor()
-            currencySignLabel.textColor = UIColor.blackColor()
+            backgroundView.backgroundColor = UIColor.red
+            backgroundView.alpha = 0.3
+            billField.textColor = UIColor.black
+            tipLabel.textColor = UIColor.black
+            totalLabel.textColor = UIColor.black
+            currencySignLabel.textColor = UIColor.black
         } else if (currentColorIndex == 1) {
-            backgroundView.backgroundColor = UIColor.grayColor()
+            backgroundView.backgroundColor = UIColor.gray
             backgroundView.alpha = 0.5
-            billField.textColor = UIColor.redColor()
-            tipLabel.textColor = UIColor.redColor()
-            totalLabel.textColor = UIColor.redColor()
-            currencySignLabel.textColor = UIColor.redColor()
+            billField.textColor = UIColor.red
+            tipLabel.textColor = UIColor.red
+            totalLabel.textColor = UIColor.red
+            currencySignLabel.textColor = UIColor.red
 
         }
         
@@ -123,8 +135,40 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     }
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        if (billField.text!.isEmpty) {
+            setYPosition(deltaY: deltaY)
+        } else {
+            setYPosition(deltaY: 0)
+        }
+    }
+    
+    func animateFields() {
+        let duration = 0.5
+        let delay = 0.5
+        let options = UIViewAnimationOptions.transitionCurlUp
+        
+        if billField.text!.isEmpty {
+            UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
+                self.hideOnStart(true)
+                self.setYPosition(deltaY: self.deltaY)
+            }, completion: nil )
+            
+        } else {            
+            UIView.animate(withDuration: duration, delay: delay, options: options, animations: {
+                self.hideOnStart(false)
+                self.setYPosition(deltaY: 0)
+            }, completion: nil )
+        }
+    }
+    
+    func setYPosition(deltaY: CGFloat) {
+        tipLabel.center.y = initialTipLabelY - 10
+        plusSignLabel.center.y = plusSignLabelY - 10
+        currencySignLabel.center.y = currencySignLabelY - 20
+        totalLabel.center.y = totalLabelY - 20
+        tipControl.center.y = tipControlY - 40
     }
     
     func sendMessage() {
@@ -134,27 +178,27 @@ class ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
         messageVC.recipients = []
         messageVC.messageComposeDelegate = self
         
-        presentViewController(messageVC, animated: true, completion: nil)
+        present(messageVC, animated: true, completion: nil)
     }
     
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         switch result.rawValue {
-        case MessageComposeResultCancelled.rawValue :
+        case MessageComposeResult.cancelled.rawValue :
             print("message canceled")
             
-        case MessageComposeResultFailed.rawValue :
+        case MessageComposeResult.failed.rawValue :
             print("message failed")
             
-        case MessageComposeResultSent.rawValue :
+        case MessageComposeResult.sent.rawValue :
             print("message sent")
             
         default:
             break
         }
-        controller.dismissViewControllerAnimated(true, completion: nil)
+        controller.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func payAction(sender: AnyObject) {
+    @IBAction func payAction(_ sender: AnyObject) {
         sendMessage()
     }
 
